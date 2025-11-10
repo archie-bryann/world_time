@@ -16,12 +16,19 @@ class _LoadingState extends State<Loading> {
   void setupWorldTime() async {
     WorldTime instance = WorldTime(location: "Berlin", flag: "germany.png", url: "Europe/Berlin");
     await instance.getTime();
-    if (kDebugMode) {
-      print(instance.time);
-      setState(() {
-        time = instance.time;
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, '/home', arguments: {
+        'location': instance.location,
+        'flag': instance.flag,
+        'time': instance.time
       });
     }
+    // if (kDebugMode) {
+    //   print(instance.time);
+    // }
+    // setState(() {
+    //   time = instance.time;
+    // });
   }
 
   // void getData() async {
@@ -64,6 +71,7 @@ class _LoadingState extends State<Loading> {
     // getData();
     // getTime();
     setupWorldTime();
+
   }
 
   @override
@@ -71,7 +79,8 @@ class _LoadingState extends State<Loading> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(50.0),
-        child: Text(time),
+        // child: Text(time),
+        child: Text('loading...')
       ),
     );
   }
