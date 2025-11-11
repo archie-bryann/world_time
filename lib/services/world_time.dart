@@ -8,6 +8,7 @@ class WorldTime {
   late String time; // the time in that location
   String flag; // url to an asset flag icon
   String url; // location url for api endpoint
+  late bool isDayTime; // true or false if daytime
 
   WorldTime({ required this.location, required this.flag, required this.url });
 
@@ -38,12 +39,14 @@ class WorldTime {
 
       // set the time property
       // time = now.toString();
+      isDayTime = now.hour > 6 && now.hour < 20 ? true : false;
       time = DateFormat.jm().format(now);
 
     } catch (e) {
       if (kDebugMode) {
         print('caught error: $e');
         time = "an error occurred...";
+        isDayTime = false;
       }
     }
   }
