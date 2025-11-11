@@ -18,3 +18,6 @@ samples, guidance on mobile development, and a full API reference.
 
 ![image1](./img.png)
 ![image2](./img_1.png)
+
+https://docs.flutter.dev/ui/widgets
+https://docs.flutter.dev/reference/learning-resources

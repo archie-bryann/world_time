@@ -22,6 +22,20 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
   ];
 
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    await instance.getTime();
+    // navigate to home screen
+    if (mounted) {
+      Navigator.pop(context, {
+        'location': instance.location,
+        'flag': instance.flag,
+        'time': instance.time,
+        'isDayTime': instance.isDayTime
+      });
+    }
+  }
+
   // void getData() async {
   //   // simulate network request for a username
   //   String username = await Future.delayed(Duration(seconds: 3), () {
@@ -89,9 +103,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
             child: Card(
               child: ListTile(
                 onTap: () {
-                  if(kDebugMode) {
-                    print(locations[index].location);
-                  }
+                  // if(kDebugMode) {
+                  //   print(locations[index].location);
+                  // }
+                  updateTime(index);
                 },
                 title: Text(locations[index].location),
                 leading: CircleAvatar(
